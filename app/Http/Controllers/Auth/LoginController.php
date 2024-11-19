@@ -59,6 +59,8 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
+
+
         if (!empty(auth()->user()->company_id))
             session(['company_id' => auth()->user()->company_id]);
         else {

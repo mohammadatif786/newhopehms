@@ -33,6 +33,8 @@ class CompanyController extends Controller
      * @param Request $request
      * @return void
      */
+
+
     public function companyAccountSwitch(Request $request)
     {
         $companySwitch = $request->company_switch;
