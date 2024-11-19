@@ -45,7 +45,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="email">@lang('Email') <b class="ambitious-crimson"></b></label>
                                     <div class="input-group mb-3">
@@ -62,9 +62,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
+                            </div> --}}
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="categorey">@lang('Patient Categorey')</label>
@@ -88,6 +86,9 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+
 
                             {{-- <div class="col-md-6">
                                 <div class="form-group">
@@ -125,7 +126,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-md-6">
                                 <label for="doctor_id">@lang('Select Doctor')</label>
                                 <select id="doctor_id" name="doctor_id"
                                     class="form-control @error('doctor_id') is-invalid @enderror">
@@ -239,14 +240,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="date_of_birth">@lang('Date of Birth')</label>
+                                    <label for="date_of_birth">@lang('Age')</label>
                                     <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
+                                        {{-- <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-calendar-check"></i></span>
-                                        </div>
+                                        </div> flatpickr --}}
                                         <input type="text" name="date_of_birth" id="date_of_birth"
-                                            class="form-control flatpickr @error('date_of_birth') is-invalid @enderror"
-                                            placeholder="@lang('Date of Birth')" value="{{ old('date_of_birth') }}">
+                                            class="form-control  @error('date_of_birth') is-invalid @enderror"
+                                            placeholder="@lang('Enter Age')" value="{{ old('date_of_birth') }}">
                                         @error('date_of_birth')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -280,10 +281,10 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="previous_drug">@lang('Previous Drug')</label>
+                                    <label for="previous_drug">@lang('Prescription')</label>
                                     <div class="input-group mb-3">
                                         <textarea name="previous_drug" id="previous_drug" class="form-control @error('previous_drug') is-invalid @enderror"
-                                            rows="4" placeholder="@lang('Enter Custom Field 1')">{{ old('previous_drug') }}</textarea>
+                                            rows="4" placeholder="@lang('Enter Prescription ')">{{ old('previous_drug') }}</textarea>
                                         @error('previous_drug')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -332,10 +333,10 @@
                             <div id="file-list" class="file-list"></div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="text_field">@lang('Previous History')</label>
+                                    <label for="text_field">@lang('Medical History')</label>
                                     <div class="input-group mb-3">
                                         <textarea name="text_field" id="text_field" class="form-control @error('text_field') is-invalid @enderror"
-                                            rows="4" placeholder="@lang('Enter Previous History')">{{ old('text_field') }}</textarea>
+                                            rows="4" placeholder="@lang('Enter Medical History')">{{ old('text_field') }}</textarea>
                                         @error('text_field')
                                             <div class="invalid-feedback">
                                                 {{ $message }}

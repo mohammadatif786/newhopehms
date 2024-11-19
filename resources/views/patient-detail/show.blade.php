@@ -86,26 +86,27 @@
                                 <p>{{ $patientDetail->name }}</p>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        {{-- <div class="col-md-4">
                             <div class="form-group">
                                 <label for="email">@lang('Email')</label>
                                 <p>{{ $patientDetail->email }}</p>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="phone">@lang('Phone')</label>
                                 <p>{{ $patientDetail->phone }}</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="gender">@lang('Gender')</label>
                                 <p>{{ ucfirst($patientDetail->gender) }}</p>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="blood_group">@lang('Blood Group')</label>
@@ -114,18 +115,19 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="date_of_birth">@lang('Date of Birth')</label>
+                                <label for="date_of_birth">@lang('Age')</label>
                                 <p>{{ $patientDetail->date_of_birth }}</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="address">@lang('Address')</label>
                                 <p>{!! $patientDetail->address !!}</p>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="doctor">@lang('Doctor')</label>
@@ -146,11 +148,9 @@
                                 </p>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="previous_drug">@lang('Previous Drug')</label>
+                                <label for="previous_drug">@lang('Prescription')</label>
                                 <p>
                                     @if ($patientDetail->previous_drug)
                                         {{ $patientDetail->previous_drug }}
@@ -160,6 +160,9 @@
                                 </p>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+
 
                         <div class="col-md-4">
                             <div class="form-group">
@@ -176,7 +179,7 @@
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="text_field">@lang('Previous History')</label>
+                                <label for="text_field">@lang('Medical History')</label>
                                 <p>
                                     @if ($patientDetail->text_field)
                                         {{ $patientDetail->text_field }}

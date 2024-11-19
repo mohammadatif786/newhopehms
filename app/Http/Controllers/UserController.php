@@ -45,8 +45,10 @@ class UserController extends Controller
         if ($request->export)
             return $this->doExport($request);
 
-        $users = $this->filter($request)->paginate(10);
+        $users = $this->filter($request)->where('company_id',session('company_id'))->paginate(10);
+
         return view('users.index',compact('users'));
+
     }
 
     /**

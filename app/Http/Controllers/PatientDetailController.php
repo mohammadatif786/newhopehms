@@ -130,7 +130,7 @@ class PatientDetailController extends Controller
      */
     public function create()
     {
-        $doctors = User::role('doctor')->get();
+        $doctors = User::role('doctor')->where('company_id',session('company_id'))->get();
         return view('patient-detail.create', compact('doctors'));
     }
 
@@ -156,7 +156,7 @@ class PatientDetailController extends Controller
         }
 
         if ($request->date_of_birth) {
-            $userData['date_of_birth'] = Carbon::parse($request->date_of_birth);
+            $userData['date_of_birth'] = $request->date_of_birth;
         }
 
         // Start the database transaction
@@ -218,7 +218,7 @@ class PatientDetailController extends Controller
      */
     public function edit(User $patientDetail)
     {
-        $doctors = User::role('doctor')->get();
+        $doctors = User::role('doctor')->where('company_id', session('company_id'))->get();
         return view('patient-detail.edit', compact('patientDetail', 'doctors'));
     }
 
@@ -241,7 +241,7 @@ class PatientDetailController extends Controller
             $userData['photo'] = 'storage/' . $request->photo->store('user-images');
 
         if ($request->date_of_birth)
-            $userData['date_of_birth'] = Carbon::parse($request->date_of_birth);
+            $userData['date_of_birth'] = $request->date_of_birth;
 
         DB::transaction(function () use ($patientDetail, $userData) {
             $patientDetail->update($userData);
@@ -279,7 +279,7 @@ class PatientDetailController extends Controller
             'blood_group' => ['nullable', 'in:A+,A-,B+,B-,O+,O-,AB+,AB-'],
             'photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
             'address' => ['nullable', 'string', 'max:1000'],
-            'date_of_birth' => ['nullable', 'date'],
+            'date_of_birth' => ['nullable', 'string'],
             'status' => ['required', 'in:0,1'],
             'doctor_id' => 'nullable|exists:users,id',
             //'file_path' => 'required|file|mimes:jpg,png,pdf|max:2048',
@@ -320,7 +320,7 @@ class PatientDetailController extends Controller
     public function dischargedPatients()
     {
         // Get all patients with 'discharged' status
-        $dischargedPatients = User::where('status', 'discharged')->paginate(10);
+        $dischargedPatients = User::where('status', 'discharged')->where('company_id', session('company_id'))->paginate(10);
 
         // Pass the discharged patients to the view
         return view('patient-detail.discharge-patient', compact('dischargedPatients'));

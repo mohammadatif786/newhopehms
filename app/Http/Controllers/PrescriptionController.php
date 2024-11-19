@@ -52,24 +52,36 @@ class PrescriptionController extends Controller
      * @return \Illuminate\Http\Response
      */
     private function filter(Request $request)
-    {
-        $query = Prescription::query();
+{
+    $query = Prescription::query();
 
-        if (auth()->user()->hasRole('Doctor'))
-            $query->where('doctor_id', auth()->id());
-        elseif ($request->doctor_id)
-            $query->where('doctor_id', $request->doctor_id);
+    // Apply the common `with` and `company_id` filter
+    $query->with('user')->whereHas('user', function ($q) {
+        $q->where('company_id', session('company_id'));
+    });
 
-        if (auth()->user()->hasRole('Patient'))
-            $query->where('user_id', auth()->id());
-        elseif ($request->user_id)
-            $query->where('user_id', $request->user_id);
-
-        if ($request->prescription_date)
-            $query->where('prescription_date', $request->prescription_date);
-
-        return $query;
+    // Check for Doctor role or doctor_id from request
+    if (auth()->user()->hasRole('Doctor')) {
+        $query->where('doctor_id', auth()->id());
+    } elseif ($request->doctor_id) {
+        $query->where('doctor_id', $request->doctor_id);
     }
+
+    // Check for Patient role or user_id from request
+    if (auth()->user()->hasRole('Patient')) {
+        $query->where('user_id', auth()->id());
+    } elseif ($request->user_id) {
+        $query->where('user_id', $request->user_id);
+    }
+
+    // Check for prescription date
+    if ($request->prescription_date) {
+        $query->where('prescription_date', $request->prescription_date);
+    }
+
+    return $query;
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -79,7 +91,7 @@ class PrescriptionController extends Controller
      */
     public function create(Request $request)
     {
-        $patients = User::role('Patient')->where('status', '1')->get(['id', 'name']);
+        $patients = User::role('Patient')->where('company_id',session('company_id'))->where('status', '1')->get(['id', 'name']);
         $patientCaseStudy = null;
 
         if ($request->user_id)
@@ -141,7 +153,7 @@ class PrescriptionController extends Controller
      */
     public function edit(Request $request, Prescription $prescription)
     {
-        $patients = User::role('Patient')->where('status', '1')->get(['id', 'name']);
+        $patients = User::role('Patient')->where('company_id',session('company_id'))->where('status', '1')->get(['id', 'name']);
         $patientCaseStudy = null;
 
         if ($request->user_id)

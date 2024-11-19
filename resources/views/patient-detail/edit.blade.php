@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="email">@lang('Email') <b class="ambitious-crimson"></b></label>
                                     <div class="input-group mb-3">
@@ -59,26 +59,6 @@
                                             class="form-control @error('email') is-invalid @enderror"
                                             placeholder="@lang('Email')">
                                         @error('email')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            {{-- <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="password">@lang('Password')</label>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-key"></i></span>
-                                        </div>
-                                        <input type="password" id="password" name="password"
-                                            class="form-control @error('password') is-invalid @enderror"
-                                            placeholder="@lang('Password')">
-                                        @error('password')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -106,31 +86,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="doctor_id">@lang('Select Doctor')</label>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-user-md"></i></span>
-                                </div>
-                                <select name="doctor_id" class="form-control @error('doctor_id') is-invalid @enderror"
-                                    id="doctor_id">
-                                    <option value="">--@lang('Choose a doctor')--</option>
-                                    @foreach ($doctors as $doctor)
-                                        <option value="{{ $doctor->id }}"
-                                            @if (old('doctor_id', $patientDetail->doctor_id) == $doctor->id) selected @endif>
-                                            {{ $doctor->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('doctor_id')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-
-
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -155,6 +110,52 @@
                                     </div>
                                 </div>
                             </div>
+                            {{-- <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="password">@lang('Password')</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                        </div>
+                                        <input type="password" id="password" name="password"
+                                            class="form-control @error('password') is-invalid @enderror"
+                                            placeholder="@lang('Password')">
+                                        @error('password')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div> --}}
+                            <div class="form-group col-md-6">
+                                <label for="doctor_id">@lang('Select Doctor')</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-user-md"></i></span>
+                                    </div>
+                                    <select name="doctor_id" class="form-control @error('doctor_id') is-invalid @enderror"
+                                        id="doctor_id">
+                                        <option value="">--@lang('Choose a doctor')--</option>
+                                        @foreach ($doctors as $doctor)
+                                            <option value="{{ $doctor->id }}"
+                                                @if (old('doctor_id', $patientDetail->doctor_id) == $doctor->id) selected @endif>
+                                                {{ $doctor->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('doctor_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="blood_group">@lang('Blood Group')</label>
@@ -172,6 +173,25 @@
                                             @endforeach
                                         </select>
                                         @error('blood_group')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="date_of_birth">@lang('Age')</label>
+                                    <div class="input-group mb-3">
+                                        {{-- <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-calendar-check"></i></span>
+                                        </div> flatpickr --}}
+                                        <input type="text" name="date_of_birth" id="date_of_birth"
+                                            class="form-control @error('date_of_birth') is-invalid @enderror"
+                                            placeholder="@lang('Enter Age')"
+                                            value="{{ old('date_of_birth', $patientDetail->date_of_birth) }}">
+                                        @error('date_of_birth')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -212,25 +232,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="date_of_birth">@lang('Date of Birth')</label>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-calendar-check"></i></span>
-                                        </div>
-                                        <input type="text" name="date_of_birth" id="date_of_birth"
-                                            class="form-control flatpickr @error('date_of_birth') is-invalid @enderror"
-                                            placeholder="@lang('Date of Birth')"
-                                            value="{{ old('date_of_birth', $patientDetail->date_of_birth) }}">
-                                        @error('date_of_birth')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="status">@lang('Status') <b class="ambitious-crimson">*</b></label>
@@ -277,12 +279,12 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="previous_drug">@lang('Previous Drug')</label>
+                                    <label for="previous_drug">@lang('Prescription')</label>
                                     <div class="input-group mb-3">
                                         <input type="text" name="previous_drug" id="previous_drug"
                                             class="form-control @error('previous_drug') is-invalid @enderror"
                                             value="{{ old('previous_drug', $patientDetail->previous_drug) }}"
-                                            placeholder="@lang('Enter Previous Drug')">
+                                            placeholder="@lang('Enter Prescription')">
                                         @error('previous_drug')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -311,12 +313,12 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="text_field">@lang('Previous History')</label>
+                                    <label for="text_field">@lang('Medical History')</label>
                                     <div class="input-group mb-3">
                                         <input type="text" name="text_field" id="text_field"
                                             class="form-control @error('text_field') is-invalid @enderror"
                                             value="{{ old('text_field', $patientDetail->text_field) }}"
-                                            placeholder="@lang('Previous History')">
+                                            placeholder="@lang('Medical History')">
                                         @error('text_field')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
