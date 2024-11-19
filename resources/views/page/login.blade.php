@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}">
-        <title>@lang('Log in') | iDentSoft :: ambitiousit.net</title>
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/360_logo_fav.png') }}">
+        <title>@lang('Log in') | HealthPro360 :: Clinic</title>
 
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
@@ -27,7 +27,7 @@
             <!-- /.login-logo -->
             <div class="card card-outline card-primary">
                 <div class="card-header text-center">
-                    <a class="h1"><span class="identColor"><b>iDentSoft</b></span>clinic</a>
+                    <a class="h1"><span class="" style="color: #38b6b6"><b>HealthPro</b></span>360</a>
                 </div>
                 <div class="card-body">
                     <p class="login-box-msg m-0 p-0">@lang('Sign in to start your session')</p>
@@ -80,6 +80,27 @@
                             <button type="submit" class="btn btn-block btn-primary"> <i class="fas fa-sign-in-alt mr-2"></i> @lang('Log in')</button>
                         </div>
                     </form>
+                    
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">User Name</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>admin@healthpro360.com</td>
+                          <td>
+                              <button onclick="pastLogin()" type="button" class="btn btn-success btn-sm">
+                                  <i class="fas fa-sign-in-alt mr-2"></i>
+                              </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                 </div>
                 <!-- /.card-body -->
             </div>
@@ -99,5 +120,12 @@
         <script src="{{ asset('assets/js/adminlte.min.js') }}"></script>
         <!-- Custom Js -->
         <script src="{{ asset('assets/js/custom/login.js') }}"></script>
+        
+        <script>
+            function pastLogin(){
+                $("#email").val("admin@healthpro360.com");
+                $("#password").val("12345");
+            }
+        </script>
     </body>
 </html>

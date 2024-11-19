@@ -83,6 +83,8 @@ class PatientCaseStudyController extends Controller
         $patient = PatientCaseStudy::where('user_id', '=', $request->user_id)->first();
         if ($patient === null) {
             $patientCaseStudy = $request->only(['user_id','food_allergy','heart_disease','high_blood_pressure','diabetic','surgery','accident','others','family_medical_history','current_medication','pregnancy','breastfeeding','health_insurance']);
+            if ($request->file)
+                $patientCaseStudy['file'] = 'storage/' . $request->file->store('case-study');
             DB::transaction(function () use ($patientCaseStudy) {
                 PatientCaseStudy::create($patientCaseStudy);
             });
@@ -102,7 +104,7 @@ class PatientCaseStudyController extends Controller
     {
         if (auth()->user()->hasRole('Patient') && auth()->id() != $patientCaseStudy->user_id)
             return redirect()->route('dashboard');
-        
+
         return view('patient-case-study.show', compact('patientCaseStudy'));
     }
 
@@ -134,6 +136,8 @@ class PatientCaseStudyController extends Controller
         }
         if ($patient === null) {
             $data = $request->only(['user_id','food_allergy','heart_disease','high_blood_pressure','diabetic','surgery','accident','others','family_medical_history','current_medication','pregnancy','breastfeeding','health_insurance']);
+            if ($request->file)
+                $data['file'] = 'storage/' . $request->file->store('case-study');
             DB::transaction(function () use ($patientCaseStudy, $data) {
                 $patientCaseStudy->update($data);
             });
@@ -177,6 +181,7 @@ class PatientCaseStudyController extends Controller
             'current_medication' => ['nullable', 'string', 'max:255'],
             'pregnancy' => ['nullable', 'string', 'max:255'],
             'breastfeeding' => ['nullable', 'string', 'max:255'],
+            'file' => ['nullable', 'mimes:jpeg,png,jpg,pdf', 'max:5120'],
             'health_insurance' => ['nullable', 'string', 'max:255']
         ]);
     }

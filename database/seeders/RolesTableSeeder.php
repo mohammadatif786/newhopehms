@@ -33,8 +33,6 @@ class RolesTableSeeder extends Seeder
             'is_default' => '1',
         ]);
         $doctorPermissions = Permission::select('id')
-            ->where('name', 'doctor-detail-read')
-            ->orWhere('name', 'like', 'patient-detail-%')
             ->orWhere('name', 'like', 'patient-case-studies-%')
             ->orWhere('name', 'lab-report-read')
             ->orWhere('name', 'doctor-schedule-read')

@@ -242,6 +242,20 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
+                            <label for="file" class="col-md-12 col-form-label"><h4>{{ __('File') }}</h4></label>
+                            <div class="col-md-12">
+                                <input id="file" class="dropify" name="file" type="file" data-allowed-file-extensions="png jpg jpeg pdf" data-max-file-size="5120K" />
+                                <p>{{ __('Max Size: 1000kb, Allowed Format: png, jpg, jpeg, pdf') }}</p>
+                            </div>
+                            @error('file')
+                                <div class="error ambitious-red">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="col-md-3 col-form-label"></label>
                                 <div class="col-md-8">

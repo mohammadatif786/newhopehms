@@ -5,9 +5,9 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico">
+	<link rel="shortcut icon" type="image/x-icon" href="assets/images/360_logo_fav.png">
     <meta name="site-url" content="{{ url('/') }}">
-	<title>iDentSoft a Dental/Clinic Management Software | @lang('About') :: ambitiousit.net</title>
+	<title>HealthPro360 | @lang('About') :: Clinic</title>
 	<!-- Font Awesome Icons -->
 	<link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.css') }}">
 	<!-- Template CSS -->

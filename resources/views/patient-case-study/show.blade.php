@@ -122,4 +122,20 @@
         </div>
     </div>
 </div>
+
+@if ($patientCaseStudy->file)
+    @php
+        $extension = pathinfo(asset($patientCaseStudy->file), PATHINFO_EXTENSION);
+    @endphp
+    @if ($extension == 'pdf')
+    <div class="text-center">
+        <embed src="{{ asset($patientCaseStudy->file)}}" width="100%" height="600px" />
+    </div>
+    @else
+    <div class="text-center">
+        <img class="img-fluid img-thumbnail" src="{{ asset($patientCaseStudy->file) }}" width="1280" height="600px" alt="" />
+    </div>
+    @endif
+@endif
+
 @endsection

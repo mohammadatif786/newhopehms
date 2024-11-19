@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div id="filter" class="collapse @if(request()->isFilterActive) show @endif">
+                    <div id="filter" class="collapse @if (request()->isFilterActive) show @endif">
                         <div class="card-body border">
                             <form action="" method="get" role="form" autocomplete="off">
                                 <input type="hidden" name="isFilterActive" value="true">
@@ -45,27 +45,31 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label>@lang('Name')</label>
-                                            <input type="text" name="name" class="form-control" value="{{ request()->name }}" placeholder="@lang('Name')">
+                                            <input type="text" name="name" class="form-control"
+                                                value="{{ request()->name }}" placeholder="@lang('Name')">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label>@lang('Email')</label>
-                                            <input type="text" name="email" class="form-control" value="{{ request()->email }}" placeholder="@lang('Email')">
+                                            <input type="text" name="email" class="form-control"
+                                                value="{{ request()->email }}" placeholder="@lang('Email')">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label>@lang('Phone')</label>
-                                            <input type="text" name="phone" class="form-control" value="{{ request()->phone }}" placeholder="@lang('Phone')">
+                                            <input type="text" name="phone" class="form-control"
+                                                value="{{ request()->phone }}" placeholder="@lang('Phone')">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <button type="submit" class="btn btn-info">@lang('Submit')</button>
-                                        @if(request()->isFilterActive)
-                                            <a href="{{ route('doctor-details.index') }}" class="btn btn-secondary">@lang('Clear')</a>
+                                        @if (request()->isFilterActive)
+                                            <a href="{{ route('doctor-details.index') }}"
+                                                class="btn btn-secondary">@lang('Clear')</a>
                                         @endif
                                     </div>
                                 </div>
@@ -79,7 +83,7 @@
                                 <th>@lang('Name')</th>
                                 <th>@lang('Email')</th>
                                 <th>@lang('Phone')</th>
-                                <th>@lang('Department')</th>
+                                <th>@lang('Designation')</th>
                                 <th>@lang('Status')</th>
                                 <th data-orderable="false">@lang('Actions')</th>
                             </tr>
@@ -89,23 +93,33 @@
                                 <tr>
                                     <td>{{ $doctorDetail->user->id }}</td>
                                     <td>{{ $doctorDetail->user->name }}</td>
-                                    <td>{{ $doctorDetail->user->email }}</td>
-                                    <td>{{ $doctorDetail->user->phone }}</td>
-                                    <td>{{ $doctorDetail->hospitalDepartment->name }}</td>
+                                    <td>{{ $doctorDetail->user->email ?? 'N/A' }}</td>
+                                    <td>{{ $doctorDetail->user->phone ?? 'N/A' }}</td>
+                                    <td>{{ $doctorDetail->designation ?? 'N/A' }}</td>
+
                                     <td>
-                                        @if($doctorDetail->user->status == 1)
+                                        @if ($doctorDetail->user->status == 1)
                                             <span class="badge badge-pill badge-success">@lang('Active')</span>
                                         @else
                                             <span class="badge badge-pill badge-danger">@lang('Inactive')</span>
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('doctor-details.show', $doctorDetail) }}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="@lang('View')"><i class="fa fa-eye ambitious-padding-btn"></i></a>&nbsp;&nbsp;
+                                        <a href="{{ route('doctor-details.show', $doctorDetail) }}"
+                                            class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip"
+                                            title="@lang('View')"><i
+                                                class="fa fa-eye ambitious-padding-btn"></i></a>&nbsp;&nbsp;
                                         @can('doctor-detail-update')
-                                            <a href="{{ route('doctor-details.edit', $doctorDetail) }}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip" title="@lang('Edit')"><i class="fa fa-edit ambitious-padding-btn"></i></a>&nbsp;&nbsp;
+                                            <a href="{{ route('doctor-details.edit', $doctorDetail) }}"
+                                                class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="tooltip"
+                                                title="@lang('Edit')"><i
+                                                    class="fa fa-edit ambitious-padding-btn"></i></a>&nbsp;&nbsp;
                                         @endcan
                                         @can('doctor-detail-delete')
-                                            <a href="#" data-href="{{ route('doctor-details.destroy', $doctorDetail) }}" class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="modal" data-target="#myModal" title="@lang('Delete')"><i class="fa fa-trash ambitious-padding-btn"></i></a>
+                                            <a href="#" data-href="{{ route('doctor-details.destroy', $doctorDetail) }}"
+                                                class="btn btn-info btn-outline btn-circle btn-lg" data-toggle="modal"
+                                                data-target="#myModal" title="@lang('Delete')"><i
+                                                    class="fa fa-trash ambitious-padding-btn"></i></a>
                                         @endcan
                                     </td>
                                 </tr>
@@ -117,5 +131,5 @@
             </div>
         </div>
     </div>
-@include('layouts.delete_modal')
+    @include('layouts.delete_modal')
 @endsection

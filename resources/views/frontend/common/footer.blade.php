@@ -9,7 +9,7 @@
             <div class="row footer-top">
                 <div class="col-lg-4 footer-grid_section_w3layouts pr-lg-5">
                     <h2 class="logo-2 mb-lg-4 mb-3">
-                        <a class="navbar-brand" href="index.html">{{ $ApplicationSetting->item_name ?? '' }}</a>
+                        <a class="navbar-brand" href="{{ url("/") }}">{{ $ApplicationSetting->item_name ?? '' }}</a>
                     </h2>
                     <p>{{ $footers->bottomTagLine ?? '' }}</p>
                     <h4 class="sub-con-fo ad-info my-4">@lang('Catch on Social')</h4>
@@ -72,8 +72,8 @@
         </div>
     </div>
     <div class="cpy-right py-3">
-        <p class="text-center">Copyright © {{ date('Y') }} iDentSoft. All rights reserved | Developed by
-            <a href="https://ambitiousit.net" target="_blank"> ambitiousit.</a>
+        <p class="text-center">Copyright © {{ date('Y') }}. All rights reserved | Developed by
+            <a href="http://lightningitsolution.com/" target="_blank"> Lightning IT Solution.</a>
         </p>
     </div>
     <!-- move top -->

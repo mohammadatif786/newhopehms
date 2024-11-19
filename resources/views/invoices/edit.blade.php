@@ -37,7 +37,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="user_id">@lang('Select Patient') <b class="ambitious-crimson">*</b></label>
-                                <select name="user_id" id="user_id" class="form-control custom-width-100 select2 @error('user_id') is-invalid @enderror" required>
+                                <select name="user_id" id="user_id" class="form-control custom-width-100 @error('user_id') is-invalid @enderror" required>
                                     <option value="">--@lang('Select')--</option>
                                     @foreach($patients as $patient) {
                                         <option value="{{ $patient->id }}" @if($patient->id == old('user_id', $invoice->user_id)) selected @endif>{{ $patient->id.'. '.$patient->name }}</option>
@@ -53,7 +53,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="insurance_id">@lang('Select Insurance')</label>
-                                <select name="insurance_id" id="insurance_id" class="form-control custom-width-100 select2 @error('insurance_id') is-invalid @enderror">
+                                <select name="insurance_id" id="insurance_id" class="form-control custom-width-100 @error('insurance_id') is-invalid @enderror">
                                     <option value="">--@lang('Select')--</option>
                                     @foreach($insurances as $insurance) {
                                         <option value="{{ $insurance->id }}" @if($insurance->id == old('insurance_id', $invoice->insurance_id)) selected @endif>{{ $insurance->id.'. '.$insurance->name }}</option>
@@ -97,7 +97,7 @@
                                             @foreach (old('account_name') as $key => $value)
                                                 <tr>
                                                     <td>
-                                                        <select name="account_name[]" class="form-control select2" required>
+                                                        <select name="account_name[]" class="form-control" required>
                                                             <option value="">--@lang('Select')--</option>
                                                             @foreach ($accountHeaders as $accountHeader)
                                                                 <option value="{{ $accountHeader->name }}" @if(old('account_name')[$key] == $accountHeader->name) selected @endif>{{ $accountHeader->name }}</option>
@@ -126,7 +126,7 @@
                                             @foreach ($invoice->invoiceItems as $invoiceItem)
                                                 <tr>
                                                     <td>
-                                                        <select name="account_name[]" class="form-control select2" required>
+                                                        <select name="account_name[]" class="form-control" required>
                                                             <option value="">--@lang('Select')--</option>
                                                             @foreach ($accountHeaders as $accountHeader)
                                                                 <option value="{{ $accountHeader->name }}" @if($invoiceItem->account_name == $accountHeader->name) selected @endif>{{ $accountHeader->name }}</option>
@@ -156,7 +156,7 @@
                                     <tbody id="invoice">
                                         <tr>
                                             <td>
-                                                <select name="account_name[]" class="form-control select2" required>
+                                                <select name="account_name[]" class="form-control" required>
                                                     <option value="">--@lang('Select')--</option>
                                                     @foreach ($accountHeaders as $accountHeader)
                                                         <option value="{{ $accountHeader->name }}">{{ $accountHeader->name }}</option>

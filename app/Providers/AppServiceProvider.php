@@ -8,6 +8,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Pagination\Paginator;
 
+use Illuminate\Support\Facades\URL;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -27,9 +29,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // URL::forceScheme('https');
         if (request()->is('install'))
             return;
-        
+
         Paginator::useBootstrap();
 
         view()->composer('*', function ($view) {
@@ -40,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
                 $application = NULL;
             }
 
-            $getLang = array (
+            $getLang = array(
                 'en' => 'English',
                 'bn' => 'বাংলা',
                 'el' => 'Ελληνικά',
@@ -57,19 +60,19 @@ class AppServiceProvider extends ServiceProvider
             );
 
             $flag = array(
-                "en"=>"flag-icon-us",
-                "bn"=>"flag-icon-bd",
-                "el"=>"flag-icon-gr",
-                "pt"=>"flag-icon-pt",
-                "es"=>"flag-icon-es",
-                "de"=>"flag-icon-de",
-                "fr"=>"flag-icon-fr",
-                "nl"=>"flag-icon-nl",
-                "it"=>"flag-icon-it",
-                "vi"=>"flag-icon-vn",
-                "ru"=>"flag-icon-ru",
-                "tr"=>"flag-icon-tr",
-                'ar'=>"flag-icon-sa"
+                "en" => "flag-icon-us",
+                "bn" => "flag-icon-bd",
+                "el" => "flag-icon-gr",
+                "pt" => "flag-icon-pt",
+                "es" => "flag-icon-es",
+                "de" => "flag-icon-de",
+                "fr" => "flag-icon-fr",
+                "nl" => "flag-icon-nl",
+                "it" => "flag-icon-it",
+                "vi" => "flag-icon-vn",
+                "ru" => "flag-icon-ru",
+                "tr" => "flag-icon-tr",
+                'ar' => "flag-icon-sa"
             );
 
             $company_full_name = "No Company Imported";
@@ -80,7 +83,7 @@ class AppServiceProvider extends ServiceProvider
 
                 if (!empty(auth()->user()->company_id))
                     session(['company_id' => auth()->user()->company_id]);
-                elseif(!empty($firstCompanies))
+                elseif (!empty($firstCompanies))
                     session(['company_id' => $firstCompanies->id]);
 
                 foreach ($companies as $company) {
@@ -104,6 +107,5 @@ class AppServiceProvider extends ServiceProvider
                 ->with('flag', $flag)
                 ->with('companySettings', $activeCompany);
         });
-
     }
 }

@@ -173,6 +173,7 @@ class PatientAppointmentController extends Controller
      */
     private function registerNewPatient(Request $request)
     {
+
         $password = uniqid();
         $data = $request->only(['company_id', 'name', 'email', 'phone']);
         $data['status'] = '1';

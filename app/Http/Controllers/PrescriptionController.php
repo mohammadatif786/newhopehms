@@ -16,9 +16,9 @@ class PrescriptionController extends Controller
      */
     function __construct()
     {
-        $this->middleware('permission:prescription-read|prescription-create|prescription-update|prescription-delete', ['only' => ['index','show']]);
-        $this->middleware('permission:prescription-create', ['only' => ['create','store']]);
-        $this->middleware('permission:prescription-update', ['only' => ['edit','update']]);
+        $this->middleware('permission:prescription-read|prescription-create|prescription-update|prescription-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:prescription-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:prescription-update', ['only' => ['edit', 'update']]);
         $this->middleware('permission:prescription-delete', ['only' => ['destroy']]);
     }
 
@@ -31,7 +31,7 @@ class PrescriptionController extends Controller
     public function index(Request $request)
     {
         $prescriptions = $this->filter($request)->paginate(10);
-        
+
         if (auth()->user()->hasRole('Doctor'))
             $doctors = User::role('Doctor')->where('id', auth()->id())->where('status', '1')->get(['id', 'name']);
         else
@@ -96,13 +96,13 @@ class PrescriptionController extends Controller
      */
     public function store(Request $request)
     {
-        if (!auth()->user()->hasRole('Doctor'))
-            return redirect()->route('prescriptions.index')->with('error', trans('Only Doctor Can Create Prescription'));
+        // if (!auth()->user()->hasRole('Doctor'))
+        //     return redirect()->route('prescriptions.index')->with('error', trans('Only Doctor Can Create Prescription'));
 
-        $this->validation($request);
+        // $this->validation($request);
 
         $prescriptionData = $request->only(['user_id', 'weight', 'height', 'blood_pressure', 'chief_complaint', 'note', 'prescription_date']);
-        $caseStudyData = $request->only(['user_id','food_allergy','heart_disease','high_blood_pressure','diabetic','surgery','accident','others','family_medical_history','current_medication','pregnancy','breastfeeding','health_insurance']);
+        $caseStudyData = $request->only(['user_id', 'food_allergy', 'heart_disease', 'high_blood_pressure', 'diabetic', 'surgery', 'accident', 'others', 'family_medical_history', 'current_medication', 'pregnancy', 'breastfeeding', 'health_insurance']);
 
         $prescriptionData['doctor_id'] = auth()->id();
         $prescriptionData['medicine_info'] = $this->makeMedicineJson($request);
@@ -123,9 +123,10 @@ class PrescriptionController extends Controller
     public function show(Prescription $prescription)
     {
         if ((auth()->user()->hasRole('Patient') && auth()->id() != $prescription->user_id)
-            || (auth()->user()->hasRole('Doctor') && auth()->id() != $prescription->doctor_id))
+            || (auth()->user()->hasRole('Doctor') && auth()->id() != $prescription->doctor_id)
+        )
             return redirect()->route('dashboard');
-        
+
         $company = Company::find($prescription->user->company_id);
         $company->setSettings();
         return view('prescriptions.show', compact('company', 'prescription'));
@@ -160,11 +161,11 @@ class PrescriptionController extends Controller
     {
         if (auth()->id() != $prescription->doctor_id)
             return redirect()->route('dashboard');
-        
+
         $this->validation($request);
 
         $prescriptionData = $request->only(['user_id', 'weight', 'height', 'blood_group', 'chief_complaint', 'note', 'prescription_date']);
-        $caseStudyData = $request->only(['user_id','food_allergy','heart_disease','high_blood_pressure','diabetic','surgery','accident','others','family_medical_history','current_medication','pregnancy','breastfeeding','health_insurance']);
+        $caseStudyData = $request->only(['user_id', 'food_allergy', 'heart_disease', 'high_blood_pressure', 'diabetic', 'surgery', 'accident', 'others', 'family_medical_history', 'current_medication', 'pregnancy', 'breastfeeding', 'health_insurance']);
 
         $prescriptionData['doctor_id'] = auth()->id();
         $prescriptionData['medicine_info'] = $this->makeMedicineJson($request);
@@ -186,7 +187,7 @@ class PrescriptionController extends Controller
     {
         if (auth()->user()->hasRole('Doctor') && auth()->id() != $prescription->doctor_id)
             return redirect()->route('dashboard');
-        
+
         $prescription->delete();
         return redirect()->route('prescriptions.index')->with('success', trans('Prescription Deleted Successfully'));
     }
@@ -247,10 +248,10 @@ class PrescriptionController extends Controller
     {
         $request->validate([
             'user_id' => ['required', 'integer', 'exists:users,id'],
-            'weight' => ['required', 'numeric'],
-            'height' => ['required', 'numeric'],
-            'blood_pressure' => ['required', 'string', 'max:255'],
-            'chief_complaint' => ['required', 'string', 'max:1000'],
+            //'weight' => ['required', 'numeric'],
+            //'height' => ['required', 'numeric'],
+            //'blood_pressure' => ['required', 'string', 'max:255'],
+            //'chief_complaint' => ['required', 'string', 'max:1000'],
             'medicine_name' => ['nullable', 'array'],
             'medicine_type' => ['nullable', 'array'],
             'instruction' => ['nullable', 'array'],

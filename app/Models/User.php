@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class User
@@ -36,8 +37,17 @@ class User extends Authenticatable
         'locale',
         'date_of_birth',
         'gender',
+        'doctor_id',
         'blood_group',
         'status',
+        'previous_drug',
+        'text_field',
+        'custom_field',
+        'total_payment',
+        'paid_payment',
+        'due_payment',
+        'attachments',
+        'categorey',
     ];
 
     /**
@@ -46,7 +56,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -56,6 +67,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'attachments' => 'array',
     ];
 
     /**
@@ -99,5 +111,9 @@ class User extends Authenticatable
     public function labReports()
     {
         return $this->hasMany(LabReport::class, 'patient_id');
+    }
+    public function doctor()
+    {
+        return $this->belongsTo(User::class, 'doctor_id');
     }
 }

@@ -20,7 +20,8 @@ class PatientCaseStudy extends Model
         'current_medication',
         'pregnancy',
         'breastfeeding',
-        'health_insurance'
+        'health_insurance',
+        'file'
     ];
 
     public function user()

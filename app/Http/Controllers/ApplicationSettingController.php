@@ -8,7 +8,7 @@ use Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\ApplicationSetting;
-use Redirect,Response,Config;
+use Redirect, Response, Config;
 use Datatables;
 use Artisan;
 use Illuminate\Support\Facades\Crypt;
@@ -31,10 +31,19 @@ class ApplicationSettingController extends Controller
      */
     public function index()
     {
+        // Manually define timezones if not done in the timeZones() function
         $timezone = $this->timeZones();
+
+        // Add Asia/Karachi to the list
+        $timezone['Karachi'] = 'Asia/Karachi';
+
+        // Fetch the application settings
         $data = ApplicationSetting::find(1);
+
+        // Return view with data and timezone
         return view('admin.application_setting', compact('data', 'timezone'));
     }
+
 
 
     /**
@@ -46,12 +55,11 @@ class ApplicationSettingController extends Controller
      */
     public function update(Request $request)
     {
-        if(Str::length($request->address) == 11)
-        {
+        if (Str::length($request->address) == 11) {
             $request->address = NULL;
         }
 
-        $this->validate($request,[
+        $this->validate($request, [
             'item_name' => 'required',
             'item_short_name' => 'required',
             'company_name' => 'required',
@@ -63,15 +71,13 @@ class ApplicationSettingController extends Controller
             'favicon' => 'image|mimes:png,ico|max:2048'
         ]);
 
-        if($request->hasFile('logo'))
-        {
+        if ($request->hasFile('logo')) {
             $logo_text = $request->logo;
             $logo_text_new_name = 'logo-text.png';
             $logo_text->move('assets/images/', $logo_text_new_name);
         }
 
-        if($request->hasFile('favicon'))
-        {
+        if ($request->hasFile('favicon')) {
             $favicon = $request->favicon;
             $favicon_new_name = 'favicon.png';
             $favicon->move('assets/images/', $favicon_new_name);
@@ -94,9 +100,8 @@ class ApplicationSettingController extends Controller
         $currentLang = env('LOCALE_LANG', 'en');
         $defaultLang = $request->language;
 
-        if($currentLang != $defaultLang) {
-            if (!$this->locale($defaultLang))
-            {
+        if ($currentLang != $defaultLang) {
+            if (!$this->locale($defaultLang)) {
                 $message = "Database Connection Error !!!";
             }
         }
@@ -132,8 +137,7 @@ class ApplicationSettingController extends Controller
      */
     public function updateEnvfile($data)
     {
-        if(empty($data)||!is_array($data)||!is_file(base_path('.env')))
-        {
+        if (empty($data) || !is_array($data) || !is_file(base_path('.env'))) {
             return false;
         }
         $env = file_get_contents(base_path('.env'));
@@ -159,7 +163,7 @@ class ApplicationSettingController extends Controller
         return true;
     }
 
-     /**
+    /**
      * Method to call localeUpdateEnvfile
      *
      * @param $defaultLang
@@ -180,8 +184,7 @@ class ApplicationSettingController extends Controller
      */
     public function localeUpdateEnvfile($data)
     {
-        if(empty($data)||!is_array($data)||!is_file(base_path('.env')))
-        {
+        if (empty($data) || !is_array($data) || !is_file(base_path('.env'))) {
             return false;
         }
         $env = file_get_contents(base_path('.env'));
@@ -206,6 +209,4 @@ class ApplicationSettingController extends Controller
         Artisan::call('config:clear');
         return true;
     }
-
-
 }

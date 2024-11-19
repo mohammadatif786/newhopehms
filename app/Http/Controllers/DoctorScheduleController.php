@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DoctorSchedule;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class DoctorScheduleController extends Controller
@@ -28,7 +29,14 @@ class DoctorScheduleController extends Controller
      */
     public function index()
     {
-        $doctorSchedules = DoctorSchedule::with(['user'])->paginate(10);
+        $roleName = Auth::user()->getRoleNames();
+        if($roleName['0'] == 'Doctor') {
+            $id = Auth::user()->id;
+            $doctorSchedules = DoctorSchedule::with(['user'])->where('user_id', $id)->paginate(10);
+        } else {
+            $doctorSchedules = DoctorSchedule::with(['user'])->paginate(10);
+        }
+
         return view('doctor-schedule.index', compact('doctorSchedules'));
     }
 

@@ -26,16 +26,42 @@
     <div class="row">
         <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
+                <span class="info-box-icon bg-warning"><i class="fas fa-user-injured"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">@lang('Current Patient')</span>
+                    <span class="info-box-number">{{ $dashboardCounts['patients'] }}</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box">
                 <span class="info-box-icon bg-info"><i class="fas fa-bezier-curve"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">@lang('Department')</span>
-                    <span class="info-box-number">{{ $dashboardCounts['departments'] }}</span>
+                    <span class="info-box-text">Previous Patients</span>
+                    <span class="info-box-number">{{ $dashboardCounts['old_patients'] ?? 0 }}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
         </div>
         <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-danger"><i class="fas fa-file-medical"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">@lang('Discharge Patient')</span>
+                    <span class="info-box-number">{{ $dashboardCounts['discharge_patient'] }}</span>
+
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+
+
+
         <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
                 <span class="info-box-icon bg-success"><i class="fas fa-user-md"></i></span>
@@ -48,19 +74,10 @@
             <!-- /.info-box -->
         </div>
         <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box">
-                <span class="info-box-icon bg-warning"><i class="fas fa-user-injured"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">@lang('Patient')</span>
-                    <span class="info-box-number">{{ $dashboardCounts['patients'] }}</span>
-                </div>
-                <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-        </div>
+
+
         <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-12">
+        {{-- <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
                 <span class="info-box-icon bg-danger"><i class="fas fa-calendar-check"></i></span>
 
@@ -71,12 +88,12 @@
                 <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
-        </div>
+        </div> --}}
         <!-- /.col -->
     </div>
 
     <div class="row">
-        <div class="col-md-3 col-sm-6 col-12">
+        {{-- <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
                 <span class="info-box-icon bg-success"><i class="fas fa-file-alt"></i></span>
                 <div class="info-box-content">
@@ -86,9 +103,9 @@
                 <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
-        </div>
+        </div> --}}
         <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-12">
+        {{-- <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
                 <span class="info-box-icon bg-info"><i class="fas fa-pills"></i></span>
                 <div class="info-box-content">
@@ -98,9 +115,9 @@
                 <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
-        </div>
+        </div> --}}
         <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-12">
+        {{-- <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
                 <span class="info-box-icon bg-danger"><i class="fas fa-file-invoice-dollar"></i></span>
                 <div class="info-box-content">
@@ -110,9 +127,9 @@
                 <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
-        </div>
+        </div> --}}
         <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-12">
+        {{-- <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
                 <span class="info-box-icon bg-warning"><i class="fas fa-money-check"></i></span>
 
@@ -123,11 +140,11 @@
                 <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
-        </div>
+        </div> --}}
         <!-- /.col -->
     </div>
 
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-md-12">
             <!-- BAR CHART -->
             <div class="card card-info">
@@ -176,8 +193,7 @@
             </div>
             <!-- /.card -->
         </div>
-    </div>
-
+    </div> --}}
 @endsection
 
 @push('footer')

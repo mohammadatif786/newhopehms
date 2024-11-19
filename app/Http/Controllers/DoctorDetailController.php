@@ -219,7 +219,7 @@ class DoctorDetailController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'unique:users,email,' . $id, 'max:255'],
+
             'phone' => ['nullable', 'string', 'max:14'],
             'specialist' => ['nullable', 'string', 'max:255'],
             'designation' => ['nullable', 'string', 'max:255'],
@@ -229,17 +229,17 @@ class DoctorDetailController extends Controller
             'address' => ['nullable', 'string', 'max:1000'],
             'date_of_birth' => ['nullable', 'date'],
             'biography' => ['nullable', 'string', 'max:1000'],
-            'hospital_department_id' => ['required', 'exists:hospital_departments,id'],
+            //'hospital_department_id' => ['required', 'exists:hospital_departments,id'],
             'status' => ['required', 'in:0,1']
         ]);
 
-        if (empty($id))
-            $request->validate([
-                'password' => ['required', 'string', 'min:8', 'max:255']
-            ]);
-        else
-            $request->validate([
-                'password' => ['nullable', 'string', 'min:8', 'max:255']
-            ]);
+        // if (empty($id))
+        //     $request->validate([
+        //         'password' => ['string', 'min:8', 'max:255']
+        //     ]);
+        // else
+        //     $request->validate([
+        //         'password' => ['nullable', 'string', 'min:8', 'max:255']
+        //     ]);
     }
 }
