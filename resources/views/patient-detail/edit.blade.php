@@ -281,10 +281,9 @@
                                 <div class="form-group">
                                     <label for="previous_drug">@lang('Prescription')</label>
                                     <div class="input-group mb-3">
-                                        <input type="text" name="previous_drug" id="previous_drug"
+                                        <textarea type="text" name="previous_drug" id="previous_drug"
                                             class="form-control @error('previous_drug') is-invalid @enderror"
-                                            value="{{ old('previous_drug', $patientDetail->previous_drug) }}"
-                                            placeholder="@lang('Enter Prescription')">
+                                            value="{{ old('previous_drug', $patientDetail->previous_drug) }}" placeholder="@lang('Enter Prescription')">{{ $patientDetail->previous_drug }}</textarea>
                                         @error('previous_drug')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -315,10 +314,9 @@
                                 <div class="form-group">
                                     <label for="text_field">@lang('Medical History')</label>
                                     <div class="input-group mb-3">
-                                        <input type="text" name="text_field" id="text_field"
+                                        <textarea type="text" name="text_field" id="text_field"
                                             class="form-control @error('text_field') is-invalid @enderror"
-                                            value="{{ old('text_field', $patientDetail->text_field) }}"
-                                            placeholder="@lang('Medical History')">
+                                            value="{{ old('text_field', $patientDetail->text_field) }}" placeholder="@lang('Medical History')">{{ $patientDetail->text_field }}</textarea>
                                         @error('text_field')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
