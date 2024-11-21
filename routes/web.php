@@ -107,7 +107,8 @@ Route::group(['middleware' => ['auth']], function () {
         'currency' => App\Http\Controllers\CurrencyController::class,
         'tax' => App\Http\Controllers\TaxController::class,
         'smtp-configurations' => App\Http\Controllers\SmtpConfigurationController::class,
-        'company' => App\Http\Controllers\CompanyController::class
+        'company' => App\Http\Controllers\CompanyController::class,
+        'permissions' => App\Http\Controllers\PermissionController::class,
     ]);
 
     Route::put('/front-ends/updateHome/{frontEnd}', [App\Http\Controllers\FrontEndController::class, 'updateHome'])->name('front-ends.updateHome');

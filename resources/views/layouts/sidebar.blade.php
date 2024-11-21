@@ -97,7 +97,7 @@
                         </a>
                     </li>
                 @endcanany
-             
+
                 {{-- @canany(['doctor-schedule-read', 'doctor-schedule-create', 'doctor-schedule-update', 'doctor-schedule-delete'])
                     <li class="nav-item">
                         <a href="{{ route('doctor-schedules.index') }}"

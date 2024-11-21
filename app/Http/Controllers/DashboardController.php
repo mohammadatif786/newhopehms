@@ -31,7 +31,9 @@ class DashboardController extends Controller
         if (auth()->user()->hasRole('Super Admin'))
             return $this->adminDashboard();
         else
-            return view('dashboards.common-dashboard');
+            // return view('dashboards.common-dashboard');
+            return $this->adminDashboard();
+
     }
 
     /**
